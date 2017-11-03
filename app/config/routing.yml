@@ -1,0 +1,8 @@
+my_bio_api:
+    resource: "@MyBioApiBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
