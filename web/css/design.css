@@ -1,0 +1,138 @@
+.demo-layout-transparent {
+    //background: url('https://getmdl.io/assets/demos/transparent.jpg') center / cover;
+    background: url('http://eskipaper.com/images/blur-background-1.jpg') center / cover;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+    /* This background is dark, so we set text to white. Use 87% black instead if
+       your background is light. */
+    color: white;
+}
+
+.mdl-layout__content{
+
+    height:100vh;
+}
+
+.mdl-textfield__input{
+    padding:0 !important;
+}
+
+
+.part{
+    position: absolute;
+    height:100vh;
+    width:100%;
+    opacity:0.3;
+}
+
+.mdl-textfield__label{
+    color: #fff !important;
+    //background: #fff;
+
+}
+
+.mdl-textfield__input, mdl-textfield__label{
+    border-color: #fff !important;
+    color: #fff;
+}
+
+.mdl-layout__content{
+    //display: flex;
+}
+
+form {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //flex-direction: column;
+    border:1px solid #fff;
+    //min-height:100px;
+    min-width:100px;
+    padding:40px;
+}
+
+.contain{
+    display: none;
+    display: flex;
+    flex-wrap: wrap ;
+    justify-content: center;
+    margin: 50px 10%;
+    //width: 100vh;
+}
+
+.mdl-card__supporting-text{
+    text-indent: 10px;
+}
+
+.demo-card-wide.mdl-card {
+    width: 100%;
+    //padding:5px;
+    margin: 20px 0;
+    //border: 3px solid #ccc;
+    //border-radius: 0 20px;
+    //box-shadow: none !important;
+}
+.demo-card-wide > .mdl-card__title {
+    color: #000;
+    //height: 176px;
+    //background: url('http://uxmentors.co.uk/assets/pictures/background-conference-1.jpg') center center / cover;
+    background: #fff;
+
+}
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+
+.preload {
+    width:100vh;
+    height: 100vh;
+    position: fixed;
+
+    z-index: 999;
+    background: #fff !important;
+}
+
+.remove {
+    display: none;
+}
+
+.info{
+
+    //background-color: #3a3a3a!important;
+    //background: url('http://uxmentors.co.uk/assets/pictures/background-conference-1.jpg') center center / cover !important;
+   //height:100%;
+
+}
+
+.mdl-card__title  {
+    background: #3a3a3a;
+    color: #fff;
+}
+
+.contain button{
+    position: absolute;
+    top: -27px;
+    right:-27px;
+}
+
+.mdl-card{
+    overflow: visible !important;
+    min-height: 200px;
+}
+
+.n{
+    right: 115px! important;
+}
+
+.contain .title_logo {
+    position: relative;
+    left : -22px;
+    font-size: 1.5em;
+    color: deeppink;
+}
+
+.material-icons{
+    color: #fff;
+}

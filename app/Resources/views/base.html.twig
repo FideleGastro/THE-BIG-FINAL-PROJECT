@@ -9,9 +9,39 @@
         <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
         <script src="{{ asset('js/jquery.particleground.min.js') }}"></script>
+        <script src="{{ asset('js/global.js') }}"></script>
+        <link rel="stylesheet" href="{{ asset('css/design.css') }}">
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <div  class="demo-layout-transparent mdl-layout mdl-js-layout">
+        <div class="part"   id="particles" ></div>
+        <header class="mdl-layout__header mdl-layout__header--transparent">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title">BioLib Packager</span>
+                <div class="mdl-layout-spacer"></div>
+                <nav class="mdl-navigation">
+
+                    <a class="mdl-navigation__link" href="">help: SEARCH</a>
+                    <a class="mdl-navigation__link" href="">help: API</a>
+                    <a class="mdl-navigation__link" href="">FAQ</a>
+                    <a class="mdl-navigation__link" href="">about</a>
+                </nav>
+            </div>
+        </header>
+        <div  class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Title</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="">Link</a>
+            </nav>
+        </div>
+        <main id="xparticles" class="mdl-layout__content">
+            {% block body %}
+            {% endblock %}
+        </main>
+    </div>
         {% block javascripts %}
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
@@ -19,11 +49,10 @@
                         dotColor: '#fff',
                         lineColor: '#fff'
                     });
-                    var intro = document.getElementById('intro');
+                    let intro = document.getElementById('intro');
                     intro.style.marginTop = - intro.offsetHeight / 2 + 'px';
                 }, false);
             </script>
-
         {% endblock %}
     </body>
 </html>

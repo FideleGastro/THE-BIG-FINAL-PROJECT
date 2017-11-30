@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="contain">
+        <div style="background: rgba(0,0,0,0.0)">
+            {% for art in article %}
+                <h6 style="color:#fff">{{ loop.index }} - {{ art.title }}</h6>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+
+    </style>
+{% endblock %}

@@ -11,28 +11,37 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="home")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        if ($request->isMethod('POST'))
-            $valid = $request->get('query');
-        else
-            $valid = 'toto';
-        $response = $this->forward('MyBioApiBundle:Default:get', array(
-            'query'  => $valid,
-        ));
-        $response = json_decode($response->getContent(), true);
 
-        if ($valid == "toto")
             return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+                'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
             ]);
-        else
-            return $this->render('default/result.html.twig', [
-                'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-                'request' => $response,
-                'test' => $valid
-            ]);
-
-
     }
+        /**
+         * @Route("/result", name="result")
+         */
+        public function resultAction(Request $request)
+        {
+            if ($request->isMethod('POST'))
+                $query = $request->get('query');
+
+            $response = $this->forward('MyBioApiBundle:EuropePMC:query', array(
+                'query' => $query,
+            ));
+            $response = json_decode($response->getContent(), true);
+            dump($response);
+
+            if($query)
+            return $this->render('default/result.html.twig', [
+                'request' => $response,
+                'query' => $query
+            ]);
+            else
+                return $this->render('default/index.html.twig', [
+                    'request' => $response
+                ]);
+
+        }
+
 }

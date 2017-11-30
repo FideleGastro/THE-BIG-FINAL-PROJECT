@@ -1,109 +1,45 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
-        <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
-            <header class="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
-                <div class="mdl-layout__header-row">
-                    <span class="mdl-layout-title">Project</span>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+        go
+    </button>
+    <div class="contain">
 
-                    <div class="mdl-layout-spacer"></div>
-                    <div class="">
-                        <a href="" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                            retour
-                        </a>
+        {% for article in request.resultList.result %}
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title ">
+                        <div class="title_logo">▶</div>
+                        <h2 class="mdl-card__title-text"> {{ article.title }}</h2>
                     </div>
-                </div>
-            </header>
-            <div class="demo-ribbon" id="particles"></div>
-            <main class="demo-main mdl-layout__content">
-                <div class="demo-container mdl-grid">
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-                    <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
-                        <div class="demo-crumbs mdl-color-text--grey-500">
-                            search : {{ test }}
-                        </div><br>
-
-                        {% for article in request.resultList.result  %}
-                            {% if article.doi is defined %}
-                                <a target="_blank" href="https://doi.org/{{ article.doi }}">{{ article.title }}</a>
-
-                                {% if article.abstractText is defined %}
-                                    <p>{{ article.abstractText |slice(0, 200) }} ... </p>
-                                {% else %}
-                                    <p>Pas de description.</p>
-                                {% endif %}
-                                <br><br>
-                            {% endif %}
-
-                        {% endfor %}
-
+                    <br>
+                    <div class="mdl-card__supporting-text ">
+                        {% if article.abstractText is defined %}
+                            <p>{{ article.abstractText |slice(0, 200000) }} ... </p>
+                        {% else %}
+                            <p>Pas de description.</p>
+                        {% endif %}
                     </div>
+                    <div class="mdl-card__actions mdl-card--border ">
+                        {% if article.authorString is defined %}
+                            <br><p>Auteur: {{ article.authorString }}</p>
+                            <p>Journal: {{ article.journalInfo.journal.title }}</p>
+                            <p>Date: {{ article.firstPublicationDate }}</p>
+                        {% endif %}
+                        <a  target="_blank"  href="https://doi.org/{{article.doi}}">link</a>
+                    </div>
+
+                <div class="mdl-card__menu">
+                {% if article.id is defined %}
+                    <button onclick="fetchArticle('{{ article.id }}')" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                        <i class="material-icons">add</i>
+                    </button>
+                {% endif %}
                 </div>
-            </main>
-        </div>
+
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
 
 {% block stylesheets %}
-    <style>
-        #view-source {
-            position: fixed;
-            display: block;
-            right: 0;
-            bottom: 0;
-            margin-right: 40px;
-            margin-bottom: 40px;
-            z-index: 900;
-        }
-        .demo-ribbon {
-            width: 100%;
-            height: 40vh;
-            //background-color: #3F51B5;
-            background-color: #f5f5f5;
-            -webkit-flex-shrink: 0;
-            -ms-flex-negative: 0;
-            flex-shrink: 0;
-            //position: fixed;
-        }
-
-        .demo-main {
-            margin-top: -35vh;
-            -webkit-flex-shrink: 0;
-            -ms-flex-negative: 0;
-            flex-shrink: 0;
-        }
-
-        .demo-header .mdl-layout__header-row {
-            padding-left: 40px;
-        }
-
-        .demo-container {
-            max-width: 1600px;
-            width: calc(100% - 16px);
-            margin: 0 auto;
-        }
-
-        .demo-content {
-            //border-radius: 0 20px;
-            padding: 80px 56px;
-            margin-bottom: 80px;
-            border: 1px solid #ccc;
-        }
-
-        .demo-layout.is-small-screen .demo-content {
-            padding: 40px 28px;
-        }
-
-        .demo-content h3 {
-            margin-top: 48px;
-        }
-
-        .demo-footer {
-            padding-left: 40px;
-        }
-
-        .demo-footer .mdl-mini-footer--link-list a {
-            font-size: 13px;
-        }
-    </style>
 {% endblock %}
