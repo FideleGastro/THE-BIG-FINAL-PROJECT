@@ -1,20 +1,17 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
-        go
-    </button>
-    <div class="contain">
-
+    <div class="contain  mdl-grid ">
         {% for article in request.resultList.result %}
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+            <div class="mdl-cell--5-col m-card">
+                <div class="demo-card-wide mdl-card mdl-shadow--2dp  ">
                     <div class="mdl-card__title ">
-                        <div class="title_logo">▶</div>
+
                         <h2 class="mdl-card__title-text"> {{ article.title }}</h2>
                     </div>
                     <br>
                     <div class="mdl-card__supporting-text ">
                         {% if article.abstractText is defined %}
-                            <p>{{ article.abstractText |slice(0, 200000) }} ... </p>
+                            <p>{{ article.abstractText |slice(0, 400) }}... <a  target="_blank"  href="https://doi.org/{{article.doi}}">read more</a></p>
                         {% else %}
                             <p>Pas de description.</p>
                         {% endif %}
@@ -25,17 +22,20 @@
                             <p>Journal: {{ article.journalInfo.journal.title }}</p>
                             <p>Date: {{ article.firstPublicationDate }}</p>
                         {% endif %}
-                        <a  target="_blank"  href="https://doi.org/{{article.doi}}">link</a>
-                    </div>
 
-                <div class="mdl-card__menu">
+                    </div>
+                <div class="mdl-card__menu" style="display: none">
                 {% if article.id is defined %}
-                    <button onclick="fetchArticle('{{ article.id }}')" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                    <button onclick="fetchArticle('{{ article.id }}')" class="mdl-button mdl-js-button mdl-button--raised  mdl-button--accent">
                         <i class="material-icons">add</i>
+                    </button>
+                    <button onclick="window.location.href='/page2'" class="mdl-button mdl-js-button mdl-button--raised  mdl-button--accent">
+                        <i class="material-icons">link</i>
                     </button>
                 {% endif %}
                 </div>
 
+            </div>
             </div>
         {% endfor %}
     </div>

@@ -17,6 +17,7 @@ class EuropePMCController extends Controller
         $json = file_get_contents($json_url);
         $data = json_decode($json, TRUE);
         $data = new JsonResponse($data);
+
         return $data;
     }
 

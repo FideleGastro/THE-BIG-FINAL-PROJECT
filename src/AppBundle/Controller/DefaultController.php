@@ -31,7 +31,6 @@ class DefaultController extends Controller
             ));
             $response = json_decode($response->getContent(), true);
             dump($response);
-
             if($query)
             return $this->render('default/result.html.twig', [
                 'request' => $response,
@@ -39,9 +38,8 @@ class DefaultController extends Controller
             ]);
             else
                 return $this->render('default/index.html.twig', [
-                    'request' => $response
+                    'query' => $query
                 ]);
-
         }
 
 }
