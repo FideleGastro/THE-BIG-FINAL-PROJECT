@@ -22,12 +22,21 @@
             </div>
         </header>
         <div  class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Gestion</span>
+            <span class="mdl-layout-title" style="padding-left: 0px;margin: 0 auto;">
+                <span class="mdl-chip mdl-chip--contact mdl-chip--deletable">
+                   <span class="mdl-chip__contact mdl-color--teal mdl-color-text--white">U</span>
+                    <span class="mdl-chip__text">{{ app.user.username }}</span>
+                    <a href="{{ path('fos_user_security_logout') }}" class="mdl-chip__action"><i class="material-icons">cancel</i></a>
+                </span>
+            </span>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
-                <a class="mdl-navigation__link" href="">Link</a>
+                <a class="mdl-navigation__link" href="{{ path('home') }}">Recherche</a>
+                <a class="mdl-navigation__link" href="{{ path('projet') }}">Projet</a>
+                <a class="mdl-navigation__link" href="">Aide</a>
+                {% if app.user.username == 'admin' %}
+                    <a class="mdl-navigation__link" href="{{ path('sonata_admin_dashboard') }}">Admin</a>
+                {% endif %}
+
             </nav>
         </div>
         <main id="xparticles" class="mdl-layout__content">

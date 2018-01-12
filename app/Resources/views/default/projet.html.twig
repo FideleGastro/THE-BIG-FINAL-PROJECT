@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="contain" style="padding:0; border: 0px solid #fff;">
+
+    <form style="" class="addProject" method="POST">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="add" name="newProject">
+            <label class="mdl-textfield__label" for="add">Ajouter un projet</label>
+        </div>
+    </form>
+    {% for projet in allprojet  %}
+    <table width="100%" style="margin:3px 0;" class="mdl-data-table  mdl-shadow--2dp">
+        <tr >
+            <td class="mdl-data-table__cell--non-numeric"> {{ projet.name }}  </td>
+            <td>
+                <a onclick="window.location.href='/projet/select/{{ projet.id }}'" class="mdl-button mdl-js-button">
+                   select
+                </a>
+                <a onclick="window.location.href='/projet/delete/{{ projet.id }}'" class="mdl-button mdl-js-button mdl-button--accent">
+                    delete
+                </a>
+            </td>
+        </tr>
+        {% for a in article  %}
+            {% if a.projet == projet.name %}
+        <tr >
+            <td class="mdl-data-table__cell--non-numeric"> {{ a.title }}  </td>
+            <td>
+                <a onclick="window.location.href='/article/delete/{{ a.id }}'" class="mdl-button mdl-js-button mdl-button--accent">
+                    delete
+                </a>
+            </td>
+        </tr>
+                {% endif %}
+        {% endfor %}
+    </table>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

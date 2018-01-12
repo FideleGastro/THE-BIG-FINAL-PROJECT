@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Application\Migrations;
 
@@ -8,27 +8,27 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20171129105824 extends AbstractMigration
+class Version20180107163607 extends AbstractMigration
 {
-    /**
-     * @param Schema $schema
-     */
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE article (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, content LONGTEXT NOT NULL, pmid INT NOT NULL, link VARCHAR(255) DEFAULT NULL, author VARCHAR(255) NOT NULL, date DATE NOT NULL, journal VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE article ADD projet VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE projet DROP FOREIGN KEY FK_50159CA97294869C');
+        $this->addSql('DROP INDEX UNIQ_50159CA97294869C ON projet');
+        $this->addSql('ALTER TABLE projet DROP article_id');
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE article');
+        $this->addSql('ALTER TABLE article DROP projet');
+        $this->addSql('ALTER TABLE projet ADD article_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE projet ADD CONSTRAINT FK_50159CA97294869C FOREIGN KEY (article_id) REFERENCES article (id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_50159CA97294869C ON projet (article_id)');
     }
 }

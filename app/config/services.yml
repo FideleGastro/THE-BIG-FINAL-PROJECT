@@ -33,3 +33,24 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    admin.article:
+        class: AppBundle\Admin\ArticleAdmin
+        arguments: [~, AppBundle\Entity\Article, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Article, group: Publication }
+        public: true
+
+    admin.projet:
+            class: AppBundle\Admin\ProjetAdmin
+            arguments: [~, AppBundle\Entity\Projet, ~]
+            tags:
+                - { name: sonata.admin, manager_type: orm, label: Projet, group: Publication }
+            public: true
+
+    admin.useradmin:
+            class: AppBundle\Admin\UserAdminAdmin
+            arguments: [~, AppBundle\Entity\UserAdmin, ~]
+            tags:
+                - { name: sonata.admin, manager_type: orm, label: UserAdmin , group: Utilisateur}
+            public: true

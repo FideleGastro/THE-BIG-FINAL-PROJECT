@@ -71,27 +71,9 @@ class Article
     private $journal;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="projet", type="string", length=255)
+     * @ORM\ManyToMany(targetEntity="Projet", inversedBy="article")
      */
     private $projet;
-
-    /**
-     * @return string
-     */
-    public function getProjet()
-    {
-        return $this->projet;
-    }
-
-    /**
-     * @param string $projet
-     */
-    public function setProjet($projet)
-    {
-        $this->projet = $projet;
-    }
 
     /**
      * Get id
@@ -270,5 +252,45 @@ class Article
     {
         return $this->journal;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->projet = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add projet
+     *
+     * @param \AppBundle\Entity\Projet $projet
+     *
+     * @return Article
+     */
+    public function addProjet(\AppBundle\Entity\Projet $projet)
+    {
+        $this->projet[] = $projet;
+
+        return $this;
+    }
+
+    /**
+     * Remove projet
+     *
+     * @param \AppBundle\Entity\Projet $projet
+     */
+    public function removeProjet(\AppBundle\Entity\Projet $projet)
+    {
+        $this->projet->removeElement($projet);
+    }
+
+    /**
+     * Get projet
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProjet()
+    {
+        return $this->projet;
+    }
 }

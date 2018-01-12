@@ -17,7 +17,6 @@ use Doctrine\ORM\Mapping as ORM;
 class UserAdmin extends BaseUser
 {
 
-
     /**
      * @var integer
      *

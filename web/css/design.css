@@ -1,6 +1,6 @@
 .demo-layout-transparent {
     //background: url('https://getmdl.io/assets/demos/transparent.jpg') center / cover;
-    background: url('http://eskipaper.com/images/blur-background-1.jpg') center / cover;
+    background: #6c6159 url('shttp://eskipaper.com/images/blur-background-1.jpg') center / cover;
 }
 .demo-layout-transparent .mdl-layout__header,
 .demo-layout-transparent .mdl-layout__drawer-button {
@@ -45,17 +45,45 @@ header{
     background: rgba(255,255,255,0.2);
 }
 
-form {
+form.query {
+    //margin: auto;
+    //display: flex;
+    //align-items: center;
+    //justify-content: center;
+    //flex-direction: column;
+    //border:1px solid #fff;
+    //min-height:100px;
+    //min-width:100%;
+    //padding:40px 80px;
+    padding: 0 15px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 120px;
+    //border:1px solid #fff;
+}
+
+form.addProject {
     margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    //flex-direction: column;
-    //border:1px solid #fff;
-    min-height:100px;
+//flex-direction: column;
+//border:1px solid #fff;
+    //min-height:100px;
     min-width:100%;
-    padding:40px 80px;
-    background: rgba(255,255,255,0.2);
+    padding:10px 0px;
+    //background: rgba(255,255,255,0.2);
+    //position: fixed;
+    //bottom:0;
+
+}
+
+form.addProject .mdl-textfield__input{
+    font-size: 20px !important;
+}
+
+
+table{
+    margin: 10px;
 }
 
 .contain{
@@ -96,12 +124,12 @@ form {
     //background: url('http://uxmentors.co.uk/assets/pictures/background-conference-1.jpg') center center / cover;
     background: rgba(0,0,0,0.1);
     background: darkslategrey;
-    //border-bottom: 1px solid deeppink;
+    border-bottom: 3px solid deeppink;
 
 }
 
 .mdl-card__title h2{
-    border-left: 4px solid #fff;
+    //border-left: 4px solid #fff;
     padding:0 10px;
 }
 
@@ -137,13 +165,8 @@ form {
 
 .contain button{
     position: absolute;
-    top: -10px;
-    right:-22px;
-}
-.contain button:first-child{
-
-    top: 30px;
-    right:-22px;
+    top: -15px;
+    right: -15px;
 }
 
 .mdl-card{

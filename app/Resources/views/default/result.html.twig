@@ -11,7 +11,12 @@
                     <br>
                     <div class="mdl-card__supporting-text ">
                         {% if article.abstractText is defined %}
-                            <p>{{ article.abstractText |slice(0, 400) }}... <a  target="_blank"  href="https://doi.org/{{article.doi}}">read more</a></p>
+                            <p>
+                                {{ article.abstractText |slice(0, 400) }}...
+                                {% if article.doi is defined %}
+                                    <a  target="_blank"  href="https://doi.org/{{article.doi}}">read more</a>
+                                {% endif %}
+                            </p>
                         {% else %}
                             <p>Pas de description.</p>
                         {% endif %}
@@ -19,18 +24,17 @@
                     <div class="mdl-card__actions mdl-card--border ">
                         {% if article.authorString is defined %}
                             <br><p>Auteur: {{ article.authorString }}</p>
+
                             <p>Journal: {{ article.journalInfo.journal.title }}</p>
+
                             <p>Date: {{ article.firstPublicationDate }}</p>
                         {% endif %}
 
                     </div>
-                <div class="mdl-card__menu" style="display: none">
+                <div class="mdl-card__menu" style="display: ">
                 {% if article.id is defined %}
-                    <button onclick="fetchArticle('{{ article.id }}')" class="mdl-button mdl-js-button mdl-button--raised  mdl-button--accent">
+                    <button onclick="fetchArticle('{{ article.id }}', '{{ current.name }}')" class="mdl-button mdl-js-button mdl-button--icon">
                         <i class="material-icons">add</i>
-                    </button>
-                    <button onclick="window.location.href='/page2'" class="mdl-button mdl-js-button mdl-button--raised  mdl-button--accent">
-                        <i class="material-icons">link</i>
                     </button>
                 {% endif %}
                 </div>

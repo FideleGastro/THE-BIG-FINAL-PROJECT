@@ -41,7 +41,11 @@ class Projet
      */
     private $current;
 
-
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Article", cascade={"persist"})
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     */
+    private $article_id;
 
     /**
      * @return bool
@@ -126,6 +130,4 @@ class Projet
     {
         return $this->current;
     }
-
-
 }

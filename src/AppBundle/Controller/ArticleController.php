@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Projet;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -40,19 +41,22 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/article/post/{id}")
+     * @Route("/article/post/{id}/{projet}")
      */
-    public function postAction($id)
+    public function postAction($id, $projet)
     {
         $query = $id;
         $response = $this->forward('MyBioApiBundle:EuropePMC:query', array(
             'query' => $query,
         ));
         $response = json_decode($response->getContent(), true);
-        dump($response['resultList']['result'][0]);
 
         $em = $this->getDoctrine()->getManager();
+
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
+
         $article = new Article();
+
         $article
             ->setAuthor($response['resultList']['result'][0]['authorString'])
             ->setContent($response['resultList']['result'][0]['abstractText'])
@@ -60,13 +64,13 @@ class ArticleController extends Controller
             ->setJournal($response['resultList']['result'][0]['journalInfo']['journal']['title'])
             ->setLink($response['resultList']['result'][0]['fullTextUrlList']['fullTextUrl'][0]['url'])
             ->setTitle($response['resultList']['result'][0]['title'])
-            ->setPmid($response['resultList']['result'][0]['id']);
+            ->setPmid($response['resultList']['result'][0]['id'])
+            ->setProjet($projet);
+
         $em->persist($article);
         $em->flush();
-        return $this->render('default/list.html.twig', array(
-            'response' => $id,
-            'query' => $response
-        ));
+        dump($user);
+        return new JsonResponse(array("success"=>'true'));
     }
 
     /**
@@ -80,14 +84,12 @@ class ArticleController extends Controller
         $article = $this
             ->getDoctrine()
             ->getRepository(Article::class)
-            ->findByPmid($id);
-        dump($article);
-        if (!$article)
-            return new JsonResponse(array("success"=>'false'));
-        else{
-            $em->remove($article[0]);
+            ->findOneByid($id);
+
+            $em->remove($article);
             $em->flush();
-            return new JsonResponse(array("success"=>'true'));
-        }
+            return $this->redirectToRoute('projet');
+            //return new JsonResponse(array("success"=>'true'));
+
     }
 }
